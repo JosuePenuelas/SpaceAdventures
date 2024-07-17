@@ -18,14 +18,16 @@ const VELOCITY_SHOOT: float = 320.0
 
 var on_shoot : bool = false
 var is_invicible : bool = false
+var is_death : bool = false
+var stop : bool = false
 
 var shoot_count : int = 0
 
-enum PLAYER_STATES {IDLE, RUN, FALL, JUMP, HURT, SHOOT, RUNSHOOT}
+enum PLAYER_STATES {IDLE, RUN, FALL, JUMP, HURT, SHOOT, RUNSHOOT, DEATH}
 var current_state: PLAYER_STATES = PLAYER_STATES.IDLE
 
 func _ready():
-	pass
+	SignalManager.on_death.connect(on_death)
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -35,6 +37,13 @@ func _physics_process(delta):
 	move_and_slide()
 
 func calculate_state():
+	if stop:
+		return
+	
+	if is_death:
+		set_state(PLAYER_STATES.DEATH)
+		return
+		
 	if is_invicible:
 		set_state(PLAYER_STATES.HURT)
 	else:
@@ -72,6 +81,8 @@ func set_state(new_state: PLAYER_STATES):
 			anim_player.play("run_attack")
 		PLAYER_STATES.HURT:
 			anim_player.play("hurt")
+		PLAYER_STATES.DEATH:
+			anim_player.play("death")
 
 func get_input():
 	velocity.x = 0
@@ -128,16 +139,28 @@ func _on_shoot_timer_timeout():
 		shootFire()
 
 func _on_hit_box_area_entered(area):
+	if not is_invicible:
+		appy_hit()
+
+func appy_hit():
+	SignalManager.on_damage.emit()
 	print("Me ha dañado un alien")
 	is_invicible = true
-	SignalManager.on_damage.emit()
 	invicible_timer.start()
 	if sprite2d.flip_h:
-		velocity.x = -HURT_JUMP_FORCE * 5
+		velocity.x = -HURT_JUMP_FORCE * 10
 	else:
-		velocity.x = HURT_JUMP_FORCE * 5
+		velocity.x = HURT_JUMP_FORCE * 10
 	velocity.y = HURT_JUMP_FORCE
 	move_and_slide()
 
 func _on_invincible_timer_timeout():
 	is_invicible = false
+
+func on_death():
+	is_death = true
+
+func _on_animation_player_animation_finished(anim_name):
+	if is_death:
+		SignalManager.on_game_over.emit()
+		stop = true

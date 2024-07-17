@@ -7,6 +7,10 @@ func _ready():
 	$TitleVBoxContainer/ButtonsVBoxContainer/StartButton.grab_focus()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+
+func _on_start_button_pressed():
+	get_tree().change_scene_to_file("res://scenes/level_test/level_test.tscn")
+	Engine.time_scale = 1
+
+func _on_exit_button_pressed():
+	get_tree().quit()

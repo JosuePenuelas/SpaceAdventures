@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://d2aaagjemaidy"]
+[gd_scene load_steps=16 format=3 uid="uid://d2aaagjemaidy"]
 
 [ext_resource type="Texture2D" uid="uid://blgcf5p841fqh" path="res://assets/tiles/Tileset.png" id="1_rh2gg"]
 [ext_resource type="Script" path="res://scenes/level_test/level_test.gd" id="1_yg4fy"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://jnhdye06ie8d" path="res://assets/background/black.jpg" id="6_xh514"]
 [ext_resource type="PackedScene" uid="uid://dxerux3cher11" path="res://scenes/alien1/alien1.tscn" id="7_c8wf7"]
 [ext_resource type="PackedScene" uid="uid://ct34bgknkf4vw" path="res://scenes/hud/hud.tscn" id="8_phn6a"]
+[ext_resource type="PackedScene" uid="uid://yuv1y4txcn4e" path="res://scenes/game_over/game_over.tscn" id="9_pb44g"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m7808"]
 texture = ExtResource("1_rh2gg")
@@ -959,3 +960,6 @@ position = Vector2(362, 605)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Hud" parent="CanvasLayer" instance=ExtResource("8_phn6a")]
+
+[node name="GameOver" parent="CanvasLayer" instance=ExtResource("9_pb44g")]
+visible = false
