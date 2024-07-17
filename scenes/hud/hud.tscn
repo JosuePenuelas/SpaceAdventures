@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://ct34bgknkf4vw"]
+
+[ext_resource type="Script" path="res://scenes/hud/hud.gd" id="1_2n8bg"]
+[ext_resource type="Texture2D" uid="uid://dgd3tce4tebgt" path="res://assets/GUI/GUI_Elements_1.png" id="1_idrjd"]
+[ext_resource type="Texture2D" uid="uid://bxkwt1wiq3t7t" path="res://assets/GUI/GUI_Elements_2.png" id="2_tmb0x"]
+[ext_resource type="Texture2D" uid="uid://chj6h4uy6hgx5" path="res://assets/GUI/GUI_Elements_3.png" id="3_g0i7p"]
+[ext_resource type="Texture2D" uid="uid://c1i713bwmhgot" path="res://assets/GUI/GUI_Elements_4.png" id="4_xkp4x"]
+
+[node name="Hud" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2n8bg")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="ContainerSprite" type="Sprite2D" parent="MarginContainer/HBoxContainer"]
+position = Vector2(92, 48)
+scale = Vector2(3, 3)
+texture = ExtResource("1_idrjd")
+
+[node name="LivesSprite" type="Sprite2D" parent="MarginContainer/HBoxContainer"]
+position = Vector2(137, 17)
+scale = Vector2(3, 3)
+texture = ExtResource("2_tmb0x")
+vframes = 10
+
+[node name="EnergySprite" type="Sprite2D" parent="MarginContainer/HBoxContainer"]
+position = Vector2(135, 65)
+scale = Vector2(3, 3)
+texture = ExtResource("3_g0i7p")
+vframes = 6
+
+[node name="PlayerSprite" type="Sprite2D" parent="MarginContainer/HBoxContainer"]
+position = Vector2(45, 47)
+scale = Vector2(3, 3)
+texture = ExtResource("4_xkp4x")
+
+[node name="timeout" type="Timer" parent="."]

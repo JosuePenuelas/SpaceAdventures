@@ -1,0 +1,219 @@
+[gd_scene load_steps=16 format=3 uid="uid://mkeg1isyc2iu"]
+
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_qr1qv"]
+[ext_resource type="PackedScene" uid="uid://cfsmgnec2vx2t" path="res://scenes/shot/shot.tscn" id="2_6cyyl"]
+[ext_resource type="Texture2D" uid="uid://cljawnjnrob0n" path="res://assets/sprites/Main_Characters/Char_Boy.png" id="2_tugn6"]
+
+[sub_resource type="Animation" id="Animation_jtjoi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [17]
+}
+
+[sub_resource type="Animation" id="Animation_hrrlq"]
+resource_name = "attack"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [32, 33, 34, 35, 36, 37]
+}
+
+[sub_resource type="Animation" id="Animation_0tw4l"]
+resource_name = "death"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [40, 41, 42, 43, 44, 45, 46]
+}
+
+[sub_resource type="Animation" id="Animation_4m3ql"]
+resource_name = "hurt"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [21, 22, 23]
+}
+
+[sub_resource type="Animation" id="Animation_xrlmq"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [16, 17, 18, 19, 20]
+}
+
+[sub_resource type="Animation" id="Animation_8gyak"]
+resource_name = "jumping"
+length = 0.6
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [24, 25, 26, 27, 28, 29]
+}
+
+[sub_resource type="Animation" id="Animation_lixcm"]
+resource_name = "run_attack"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_d2m12"]
+resource_name = "running"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11, 12, 13, 14, 15]
+}
+
+[sub_resource type="Animation" id="Animation_j6gfr"]
+resource_name = "fall"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [29, 28]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_trf86"]
+_data = {
+"RESET": SubResource("Animation_jtjoi"),
+"attack": SubResource("Animation_hrrlq"),
+"death": SubResource("Animation_0tw4l"),
+"fall": SubResource("Animation_j6gfr"),
+"hurt": SubResource("Animation_4m3ql"),
+"idle": SubResource("Animation_xrlmq"),
+"jumping": SubResource("Animation_8gyak"),
+"run_attack": SubResource("Animation_lixcm"),
+"running": SubResource("Animation_d2m12")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f8y6q"]
+size = Vector2(13, 23)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dwfj1"]
+radius = 8.0
+height = 24.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_qr1qv")
+fire = ExtResource("2_6cyyl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_tugn6")
+hframes = 8
+vframes = 6
+frame = 17
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_trf86")
+}
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -1.5)
+shape = SubResource("RectangleShape2D_f8y6q")
+
+[node name="HitBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, -2)
+shape = SubResource("CapsuleShape2D_dwfj1")
+
+[node name="InvincibleTimer" type="Timer" parent="."]
+
+[node name="Shoot" type="Marker2D" parent="."]
+position = Vector2(0, -8)
+
+[node name="Direction" type="Marker2D" parent="Shoot"]
+position = Vector2(20, 0)
+
+[node name="AnimationShootTimer" type="Timer" parent="."]
+wait_time = 0.6
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="JumpTimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[connection signal="timeout" from="AnimationShootTimer" to="." method="_on_animation_shoot_timer_timeout"]
+[connection signal="timeout" from="AnimationShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="timeout" from="JumpTimer" to="." method="_on_jump_timer_timeout"]

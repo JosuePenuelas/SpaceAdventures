@@ -1,0 +1,9 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://dgkfqbvojo66r"]
+
+[ext_resource type="FontFile" uid="uid://cnwkm6aa0k3s5" path="res://assets/fonts/DigitalDisco.ttf" id="1_s81lk"]
+
+[resource]
+font = ExtResource("1_s81lk")
+font_size = 64
+outline_size = 12
+outline_color = Color(0.244776, 0.244776, 0.244776, 1)
