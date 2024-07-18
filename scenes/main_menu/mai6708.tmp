@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dtsmrqa0e5kav"]
+[gd_scene load_steps=13 format=3 uid="uid://dtsmrqa0e5kav"]
 
 [ext_resource type="Texture2D" uid="uid://dam8e1l6d5f2e" path="res://assets/background/3123860_steelsoldier_quiet-space.png" id="1_7uu47"]
 [ext_resource type="Script" path="res://scenes/main_menu/main_menu.gd" id="1_ke6oi"]
@@ -7,7 +7,6 @@
 [ext_resource type="FontFile" uid="uid://cnwkm6aa0k3s5" path="res://assets/fonts/DigitalDisco.ttf" id="5_w8jkl"]
 [ext_resource type="AudioStream" uid="uid://b3wxqot2p8sxv" path="res://assets/sounds/Blip_Select.wav" id="6_4ldek"]
 [ext_resource type="AudioStream" uid="uid://885gj65w0tyt" path="res://assets/sounds/Blip_Pressed.wav" id="7_cv2t4"]
-[ext_resource type="AudioStream" uid="uid://bldwv7n6nnc58" path="res://assets/sounds/SpaceAdventures_MainMenu.wav" id="8_h8ckn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fv06t"]
 atlas = ExtResource("3_lk87c")
@@ -118,16 +117,10 @@ offset_bottom = 40.0
 stream = ExtResource("6_4ldek")
 
 [node name="BlipPressed" type="AudioStreamPlayer2D" parent="."]
-visible = false
 stream = ExtResource("7_cv2t4")
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-visible = false
-stream = ExtResource("8_h8ckn")
 
 [connection signal="focus_entered" from="TitleVBoxContainer/ButtonsVBoxContainer/StartButton" to="." method="_on_start_button_focus_entered"]
 [connection signal="pressed" from="TitleVBoxContainer/ButtonsVBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="focus_entered" from="TitleVBoxContainer/ButtonsVBoxContainer/ExitButton" to="." method="_on_exit_button_focus_entered"]
 [connection signal="pressed" from="TitleVBoxContainer/ButtonsVBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="finished" from="BlipPressed" to="." method="_on_blip_pressed_finished"]
-[connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]

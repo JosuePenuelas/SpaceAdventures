@@ -4,6 +4,7 @@ extends CharacterBody2D
 
 @onready var anim_player = $AnimationPlayer
 @onready var sprite2d = $Sprite2D
+@onready var audio_player = $AudioStreamPlayer2D
 @onready var shoot_marker = $Shoot
 @onready var shoot_timer = $ShootTimer
 @onready var animationShoot_timer = $AnimationShootTimer
@@ -20,6 +21,7 @@ var on_shoot : bool = false
 var is_invicible : bool = false
 var is_death : bool = false
 var stop : bool = false
+var is_playing_sound : bool = false
 
 var shoot_count : int = 0
 
@@ -65,6 +67,8 @@ func calculate_state():
 				set_state(PLAYER_STATES.JUMP)
 
 func set_state(new_state: PLAYER_STATES):
+	if current_state == PLAYER_STATES.FALL and is_on_floor():
+			SoundManager.play_clip(audio_player, SoundManager.SOUND_LAND)
 	current_state = new_state
 	match current_state:
 		PLAYER_STATES.RUN:
@@ -75,14 +79,29 @@ func set_state(new_state: PLAYER_STATES):
 			anim_player.play("fall")
 		PLAYER_STATES.JUMP:
 			anim_player.play("jumping")
+			if !is_playing_sound:
+				is_playing_sound = true
+				SoundManager.play_clip(audio_player, SoundManager.SOUND_JUMP)
 		PLAYER_STATES.SHOOT:
 			anim_player.play("attack")
+			if !is_playing_sound:
+				is_playing_sound = true
+				SoundManager.play_clip(audio_player, SoundManager.SOUND_ATTACK)
 		PLAYER_STATES.RUNSHOOT:
 			anim_player.play("run_attack")
+			if !is_playing_sound:
+				is_playing_sound = true
+				SoundManager.play_clip(audio_player, SoundManager.SOUND_ATTACK)
 		PLAYER_STATES.HURT:
 			anim_player.play("hurt")
+			if !is_playing_sound:
+				is_playing_sound = true
+				SoundManager.play_clip(audio_player, SoundManager.SOUND_HURT)
 		PLAYER_STATES.DEATH:
 			anim_player.play("death")
+			if !is_playing_sound:
+				is_playing_sound = true
+				SoundManager.play_clip(audio_player, SoundManager.SOUND_DEATH)
 
 func get_input():
 	velocity.x = 0
@@ -164,3 +183,7 @@ func _on_animation_player_animation_finished(anim_name):
 	if is_death:
 		SignalManager.on_game_over.emit()
 		stop = true
+
+
+func _on_audio_stream_player_2d_finished():
+	is_playing_sound = false

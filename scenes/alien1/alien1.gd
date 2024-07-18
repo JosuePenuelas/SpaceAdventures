@@ -4,6 +4,7 @@ extends CharacterBody2D
 
 @onready var anim_enemy = $AnimationPlayer
 @onready var sprite2d = $Sprite2D
+@onready var audio_player = $AudioStreamPlayer2D
 @onready var death_sprite = $DeathSprite
 @onready var attack_sprite = $AttackSprite
 @onready var floor_detection = $FloorDetection
@@ -25,6 +26,7 @@ var shoot_count: int = 0
 var on_shoot: bool = false
 var is_invicible: bool = false
 var is_death: bool = false
+var is_playing_sound : bool = false
 
 enum FACING_DRECTION {LEFT = -1, RIGHT = 1}
 var current_direction = FACING_DRECTION.RIGHT
@@ -68,18 +70,27 @@ func set_state(new_state: ENEMY_STATES):
 			attack_sprite.visible = false
 			death_sprite.visible = false
 			anim_enemy.play("hurt")
+			if !is_playing_sound:
+				is_playing_sound = true
+				SoundManager.play_clip(audio_player, SoundManager.SOUNDS_ENEMY_HURT)
 		ENEMY_STATES.ATTACK:
 			velocity.x = 0
 			attack_sprite.visible = true
 			sprite2d.visible = false
 			death_sprite.visible = false
 			attack_sprite.play()
+			if !is_playing_sound:
+				is_playing_sound = true
+				SoundManager.play_clip(audio_player, SoundManager.SOUNDS_ENEMY_ATTACK)
 		ENEMY_STATES.DEATH:
 			velocity.x = 0
 			death_sprite.visible = true
 			sprite2d.visible = false
 			attack_sprite.visible = false
 			death_sprite.play()
+			if !is_playing_sound:
+				is_playing_sound = true
+				SoundManager.play_clip(audio_player, SoundManager.SOUNDS_ENEMY_DEATH)
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -163,3 +174,6 @@ func _on_shoot_timer_timeout():
 func _on_attack_sprite_animation_finished():
 	on_shoot = false
 	shoot_count = 0
+
+func _on_audio_stream_player_2d_finished():
+	is_playing_sound = false
