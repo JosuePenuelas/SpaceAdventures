@@ -1,0 +1,66 @@
+[gd_scene load_steps=4 format=3 uid="uid://bixfbxlld5lpm"]
+
+[ext_resource type="Script" path="res://scenes/pause/pause.gd" id="1_yrr8h"]
+[ext_resource type="LabelSettings" uid="uid://dgkfqbvojo66r" path="res://assets/fonts/DD_62_BW.tres" id="2_1vdxx"]
+[ext_resource type="FontFile" uid="uid://cnwkm6aa0k3s5" path="res://assets/fonts/DigitalDisco.ttf" id="3_bet72"]
+
+[node name="Pause" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yrr8h")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.372549)
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="GamerOverLabel" type="Label" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Pause"
+label_settings = ExtResource("2_1vdxx")
+horizontal_alignment = 1
+
+[node name="ContinueButton" type="Button" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bet72")
+theme_override_font_sizes/font_size = 32
+text = "Continue"
+flat = true
+
+[node name="MainMenuButton" type="Button" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bet72")
+theme_override_font_sizes/font_size = 32
+text = "Main menu"
+flat = true
+
+[node name="ExitButton" type="Button" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bet72")
+theme_override_font_sizes/font_size = 32
+text = "Exit"
+flat = true
+
+[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

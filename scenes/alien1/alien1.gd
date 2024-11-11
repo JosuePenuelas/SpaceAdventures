@@ -34,6 +34,12 @@ var current_direction = FACING_DRECTION.RIGHT
 enum ENEMY_STATES {IDLE, RUN, FALL, JUMP, HURT, ATTACK, DEATH}
 var current_state: ENEMY_STATES = ENEMY_STATES.IDLE
 
+func _ready():
+	SignalManager.on_pause.connect(on_pause)
+	
+func on_pause():
+	audio_player.stop()
+
 func calculate_state():
 	if is_death:
 		set_state(ENEMY_STATES.DEATH)

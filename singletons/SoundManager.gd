@@ -9,7 +9,7 @@ const SOUND_PICKUP = "pickup"
 const SOUND_PAUSE = "pause"
 
 var SOUNDS = {
-	SOUND_JUMP : preload("res://assets/sounds/Jump.wav"),
+	SOUND_JUMP : preload("res://assets/sounds/Jump2.wav"),
 	SOUND_HURT : preload("res://assets/sounds/Hit_Hurt_player.wav"),
 	SOUND_DEATH : preload("res://assets/sounds/death.wav"),
 	SOUND_LAND : preload("res://assets/sounds/land.wav"),

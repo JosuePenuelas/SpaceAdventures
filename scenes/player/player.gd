@@ -105,6 +105,8 @@ func set_state(new_state: PLAYER_STATES):
 
 func get_input():
 	velocity.x = 0
+	if Input.is_action_pressed("pause"):
+		SignalManager.on_pause.emit()
 	if not is_invicible:
 		var current_speed = MOVEMENT_SPEED
 		
